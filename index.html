@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="MoveMe - Servizio traslochi a Milano: traslochi, montaggio mobili, facchinaggio e stoccaggio per privati, aziende e partner. Seleziona il tipo di trasloco (intero o singoli oggetti) e compila i dati per un servizio rapido e affidabile.">
+  <meta name="keywords" content="traslochi, montaggio mobili, Milano, MoveMe, facchinaggio, trasloco intero, traslochi aziendali, traslochi privati">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoveMe - Servizio Traslochi Milano</title>
+  <!-- Font Awesome per le icone -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1a73e8;       /* Blu primario */
+      --secondary: #34a853;     /* Verde secondario */
+      --accent: #fbbc05;        /* Accent */
+      --light: #f8f9fa;
+      --dark: #202124;
+      --gray: #5f6368;
+      --light-gray: #dadce0;
+    }
+    /* Reset e stili base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    /* Header */
+    header {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    /* Logo: "Move" in blu e "Me" in verde */
+    .logo span {
+      color: var(--secondary);
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links li {
+      margin-left: 30px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-links .contatti-link {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .total-header {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      background-color: #eef6ff;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    /* Hero Section */
+    .hero {
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("moveme.png");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 150px 20px 100px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: white;
+    }
+    .hero .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+    .hero .btn:hover {
+      background-color: #0d5bcd;
+    }
+    /* Booking Section */
+    .booking-section {
+      background-color: #fff;
+      padding: 40px 20px 60px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin: 40px auto;
+    }
+    .booking-section h2 {
+      text-align: center;
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    /* Descrizione dei passaggi */
+    .booking-description {
+      text-align: center;
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+    .booking-description strong {
+      color: var(--primary);
+    }
+    /* Sezione Traslochi case intere – Promozione */
+    .traslochi-case {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .promozione {
+      text-align: center;
+      font-size: 14px;
+      color: var(--secondary);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    /* Box traslochi interi con controlli plus/minus (max 1 per box) */
+    .traslochi-item {
+      background-color: var(--light);
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      padding: 15px;
+      text-align: center;
+      width: 22%;
+      margin-bottom: 15px;
+      position: relative;
+      cursor: pointer;
+      transition: border 0.3s;
+    }
+    .traslochi-item.selected {
+      border: 2px solid var(--secondary);
+    }
+    .traslochi-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .traslochi-controls button {
+      background-color: var(--light);
+      border: 1px solid var(--light-gray);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 28px;
+      text-align: center;
+      margin: 0 5px;
+    }
+    .traslochi-controls span {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .traslochi-item i {
+      font-size: 1.16rem; /* 20% in meno rispetto a 1.45rem */
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .traslochi-item h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .traslochi-item p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .traslochi-item small {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+    /* Items Grid per altri oggetti */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .item-card {
+      background-color: var(--light);
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .item-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .item-card i {
+      font-size: 1.16rem;  /* 20% in meno */
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .item-card h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .item-card p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    /* Pulsanti Quantità per altri oggetti */
+    .quantity-btn {
+      background-color: var(--light);
+      border: 1px solid var(--light-gray);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-size: 18px;
+    }
+    .quantity-btn:hover {
+      background-color: var(--light-gray);
+    }
+    .quantity-display {
+      font-size: 16px;
+      margin: 0 10px;
+      min-width: 20px;
+      display: inline-block;
+      text-align: center;
+    }
+    /* Form Prenotazione */
+    .booking-form {
+      padding: 20px;
+      margin-bottom: 30px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .form-group input, 
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .extra-checkbox {
+      margin-top: 10px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .extra-checkbox input {
+      margin-right: 5px;
+    }
+    /* Sezione Punti di Forza */
+    .punti-forza {
+      background-color: #fff;
+      padding: 40px 20px;
+      margin: 40px auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .punti-forza h2 {
+      text-align: center;
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .punti-forza .slogan {
+      text-align: center;
+      font-size: 18px;
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+    .punti-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .punto {
+      text-align: center;
+      padding: 10px;
+    }
+    .punto i {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+    .punto i:hover {
+      transform: rotate(10deg);
+    }
+    .punto h4 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .punto p {
+      font-size: 16px;
+      color: var(--dark);
+    }
+    /* Sezione Recensioni */
+    .recensioni {
+      background-color: #fff;
+      padding: 40px 20px;
+      margin: 40px auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .recensioni h2 {
+      text-align: center;
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .review {
+      background-color: var(--light);
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .review p {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    .review .author {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    /* Sezione Partners */
+    .partners {
+      background-color: #fff;
+      padding: 40px 20px;
+      margin: 40px auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .partners h2 {
+      text-align: center;
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .partner {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      background-color: var(--light);
+    }
+    .partner img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    .partner h4 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    /* Sezione Contattaci */
+    .contattaci-section {
+      background-color: #fff;
+      padding: 40px 20px;
+      margin: 40px auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .contattaci-section h2 {
+      text-align: center;
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .contatti-box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .contatti-info {
+      flex: 1 1 300px;
+      padding: 20px;
+    }
+    .contatti-info p {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+    }
+    .contatti-info p i {
+      color: var(--primary);
+      margin-right: 10px;
+    }
+    .contatti-map {
+      flex: 1 1 300px;
+      min-height: 300px;
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .contatti-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* Footer */
+    footer {
+      background-color: white;
+      text-align: center;
+      padding: 20px 0;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    }
+    /* Animazione in scroll */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .animate-on-scroll.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Pulsante Invia richiesta (verde) */
+    .btn-invio {
+      background-color: var(--secondary);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn-invio:hover {
+      background-color: #2ecc71;
+      transform: scale(1.05);
+    }
+    /* Media Queries per Mobile */
+    @media (max-width: 600px) {
+      .traslochi-case, .contatti-box {
+        flex-direction: column;
+        align-items: center;
+      }
+      .traslochi-item {
+        width: 80%;
+        margin-bottom: 15px;
+      }
+      .items-grid {
+        grid-template-columns: 1fr;
+      }
+      .item-card i, .traslochi-item i {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="animate-on-scroll">
+    <div class="container">
+      <nav>
+        <a href="#hero" class="logo" onclick="scrollToSection(event, 'hero')">Move<span>Me</span></a>
+        <ul class="nav-links">
+          <li><a href="#hero" onclick="scrollToSection(event, 'hero')">Home</a></li>
+          <li><a href="#booking" onclick="scrollToSection(event, 'booking')">Prenota trasloco</a></li>
+          <li><a href="#punti-forza" onclick="scrollToSection(event, 'punti-forza')">I nostri Vantaggi</a></li>
+          <li><a href="#contattaci" class="contatti-link" onclick="scrollToSection(event, 'contattaci')">Contattaci</a></li>
+          <li class="total-header">Totale Trasloco: €<span id="total-top">0</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section id="hero" class="hero animate-on-scroll">
+    <div class="container">
+      <h1>Traslochi semplici e veloci a Milano</h1>
+      <p>MoveMe offre un servizio professionale per muovere i tuoi oggetti in tutta Milano e provincia.</p>
+      <a href="#booking" class="btn" onclick="scrollToSection(event, 'booking')">Programma il tuo trasloco</a>
+    </div>
+  </section>
+  
+  <!-- Booking Section -->
+  <section id="booking" class="booking-section animate-on-scroll">
+    <div class="container">
+      <h2>Prenota il tuo Trasloco</h2>
+      <!-- Descrizione dei passaggi -->
+      <div class="booking-description">
+        <p><strong>First step:</strong> Seleziona il tuo tipo di trasloco: scegli se effettuare un trasloco intero oppure trasportare singoli oggetti.</p>
+        <p><strong>Second step:</strong> Compila i dati sottostanti per richiedere il servizio.</p>
+      </div>
+      
+      <!-- Sezione Traslochi case intere -->
+      <div class="promozione">Promozione</div>
+      <div class="traslochi-case animate-on-scroll">
+        <!-- Monolocale -->
+        <div class="traslochi-item" data-case="monolocale" data-price="500">
+          <div class="traslochi-controls">
+            <button onclick="decreaseTrasloco(this, 'monolocale')" type="button">–</button>
+            <span id="trasloco-monolocale">0</span>
+            <button onclick="increaseTrasloco(this, 'monolocale')" type="button">+</button>
+          </div>
+          <i class="fas fa-home"></i>
+          <h4>Monolocale</h4>
+          <p>€500</p>
+          <small>trasloco intero con montaggio</small>
+        </div>
+        <!-- Bilocale -->
+        <div class="traslochi-item" data-case="bilocale" data-price="800">
+          <div class="traslochi-controls">
+            <button onclick="decreaseTrasloco(this, 'bilocale')" type="button">–</button>
+            <span id="trasloco-bilocale">0</span>
+            <button onclick="increaseTrasloco(this, 'bilocale')" type="button">+</button>
+          </div>
+          <i class="fas fa-building"></i>
+          <h4>Bilocale</h4>
+          <p>€800</p>
+          <small>trasloco intero con montaggio</small>
+        </div>
+        <!-- Casa indipendente -->
+        <div class="traslochi-item" data-case="casaIndipendente" data-price="2500">
+          <div class="traslochi-controls">
+            <button onclick="decreaseTrasloco(this, 'casaIndipendente')" type="button">–</button>
+            <span id="trasloco-casaIndipendente">0</span>
+            <button onclick="increaseTrasloco(this, 'casaIndipendente')" type="button">+</button>
+          </div>
+          <i class="fas fa-house-user"></i>
+          <h4>Casa indipendente</h4>
+          <p>€2500</p>
+          <small>trasloco intero con montaggio</small>
+        </div>
+        <!-- Appartamento 3 camere -->
+        <div class="traslochi-item" data-case="appartamento" data-price="1000">
+          <div class="traslochi-controls">
+            <button onclick="decreaseTrasloco(this, 'appartamento')" type="button">–</button>
+            <span id="trasloco-appartamento">0</span>
+            <button onclick="increaseTrasloco(this, 'appartamento')" type="button">+</button>
+          </div>
+          <i class="fas fa-city"></i>
+          <h4>Appartamento 3 camere</h4>
+          <p>€1000</p>
+          <small>trasloco intero con montaggio</small>
+        </div>
+      </div>
+      
+      <!-- Griglia degli articoli da traslocare (altri oggetti) -->
+      <div class="items-grid">
+        <!-- Esempio: Divano -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-couch"></i>
+          <h4>Divano</h4>
+          <p>€150</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('divano')">–</button>
+            <span class="quantity-display" id="divano-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('divano')">+</button>
+          </div>
+        </div>
+        <!-- Esempio: Letto -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-bed"></i>
+          <h4>Letto</h4>
+          <p>€150</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('letto')">–</button>
+            <span class="quantity-display" id="letto-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('letto')">+</button>
+          </div>
+        </div>
+        <!-- Esempio: Armadio -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-warehouse"></i>
+          <h4>Armadio</h4>
+          <p>€150</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('armadio')">–</button>
+            <span class="quantity-display" id="armadio-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('armadio')">+</button>
+          </div>
+        </div>
+        <!-- Esempio: Tavolo da pranzo -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-table"></i>
+          <h4>Tavolo da pranzo</h4>
+          <p>€100</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('tavolo')">–</button>
+            <span class="quantity-display" id="tavolo-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('tavolo')">+</button>
+          </div>
+        </div>
+        <!-- Esempio: Sedia -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-chair"></i>
+          <h4>Sedia</h4>
+          <p>€50</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('sedie')">–</button>
+            <span class="quantity-display" id="sedie-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('sedie')">+</button>
+          </div>
+        </div>
+        <!-- Esempio: Scrivania -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-desktop"></i>
+          <h4>Scrivania</h4>
+          <p>€80</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('scrivania')">–</button>
+            <span class="quantity-display" id="scrivania-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('scrivania')">+</button>
+          </div>
+        </div>
+        <!-- Esempio: Libreria -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-book"></i>
+          <h4>Libreria</h4>
+          <p>€100</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('libreria')">–</button>
+            <span class="quantity-display" id="libreria-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('libreria')">+</button>
+          </div>
+        </div>
+        <!-- Elettrodomestici -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-snowflake"></i>
+          <h4>Frigorifero</h4>
+          <p>€150</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('frigo')">–</button>
+            <span class="quantity-display" id="frigo-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('frigo')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-tshirt"></i>
+          <h4>Lavatrice/Asciugatrice</h4>
+          <p>€150</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('lavatrice')">–</button>
+            <span class="quantity-display" id="lavatrice-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('lavatrice')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-fire"></i>
+          <h4>Forno/Microonde</h4>
+          <p>€60</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('forno')">–</button>
+            <span class="quantity-display" id="forno-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('forno')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-box"></i>
+          <h4>Lavastoviglie</h4>
+          <p>€100</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('lavastoviglie')">–</button>
+            <span class="quantity-display" id="lavastoviglie-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('lavastoviglie')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-fire"></i>
+          <h4>Stufa/Camino</h4>
+          <p>€100</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('stufa')">–</button>
+            <span class="quantity-display" id="stufa-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('stufa')">+</button>
+          </div>
+        </div>
+        <!-- Elettronica -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-tv"></i>
+          <h4>TV</h4>
+          <p>€100</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('tv')">–</button>
+            <span class="quantity-display" id="tv-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('tv')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-desktop"></i>
+          <h4>Computer fisso</h4>
+          <p>€30</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('computer')">–</button>
+            <span class="quantity-display" id="computer-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('computer')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-headphones"></i>
+          <h4>Impianto Stereo</h4>
+          <p>€50</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('stereo')">–</button>
+            <span class="quantity-display" id="stereo-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('stereo')">+</button>
+          </div>
+        </div>
+        <!-- Oggetti fragili -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-window-maximize"></i>
+          <h4>Vetrine</h4>
+          <p>€150</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('vetrine')">–</button>
+            <span class="quantity-display" id="vetrine-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('vetrine')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-eye"></i>
+          <h4>Specchi</h4>
+          <p>€60</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('specchi')">–</button>
+            <span class="quantity-display" id="specchi-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('specchi')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-box-open"></i>
+          <h4>Scatola piatti/bicchieri</h4>
+          <p>€40</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('scatolaPiatti')">–</button>
+            <span class="quantity-display" id="scatolaPiatti-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('scatolaPiatti')">+</button>
+          </div>
+        </div>
+        <!-- Oggetti pesanti/ingombranti -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-music"></i>
+          <h4>Pianoforte</h4>
+          <p>€200</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('pianoforte')">–</button>
+            <span class="quantity-display" id="pianoforte-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('pianoforte')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-running"></i>
+          <h4>Tapis Roulant</h4>
+          <p>€150</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('tapisRoulant')">–</button>
+            <span class="quantity-display" id="tapisRoulant-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('tapisRoulant')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-chair"></i>
+          <h4>Sgabelli</h4>
+          <p>€30</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('sgabelli')">–</button>
+            <span class="quantity-display" id="sgabelli-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('sgabelli')">+</button>
+          </div>
+        </div>
+        <!-- Oggetti personali -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-box"></i>
+          <h4>Scatoloni standard</h4>
+          <p>€30</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('scatoloni')">–</button>
+            <span class="quantity-display" id="scatoloni-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('scatoloni')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-seedling"></i>
+          <h4>Piante</h4>
+          <p>€30</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('piante')">–</button>
+            <span class="quantity-display" id="piante-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('piante')">+</button>
+          </div>
+        </div>
+        <!-- Oggetti da esterno -->
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-fire"></i>
+          <h4>Barbecue</h4>
+          <p>€80</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('barbecue')">–</button>
+            <span class="quantity-display" id="barbecue-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('barbecue')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-tree"></i>
+          <h4>Mobili da giardino</h4>
+          <p>€40</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('mobiliGiardino')">–</button>
+            <span class="quantity-display" id="mobiliGiardino-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('mobiliGiardino')">+</button>
+          </div>
+        </div>
+        <div class="item-card animate-on-scroll">
+          <i class="fas fa-box"></i>
+          <h4>Scatolone 30kg</h4>
+          <p>€40</p>
+          <div>
+            <button class="quantity-btn" onclick="decreaseQuantity('scatolone30kg')">–</button>
+            <span class="quantity-display" id="scatolone30kg-qty">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity('scatolone30kg')">+</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Form Prenotazione -->
+      <form id="bookingForm" action="https://formspree.io/f/xvgzdvra" method="POST" class="animate-on-scroll">
+        <div id="bookingFormErrors" class="error-message"></div>
+        <div class="booking-form">
+          <h3>Inserisci i tuoi dati</h3>
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" name="nome" placeholder="Inserisci il tuo nome" required>
+          </div>
+          <div class="form-group">
+            <label>Cognome</label>
+            <input type="text" name="cognome" placeholder="Inserisci il tuo cognome" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Inserisci la tua email" required>
+          </div>
+          <div class="form-group">
+            <label>Numero di Telefono</label>
+            <input type="tel" name="telefono" placeholder="Inserisci il tuo numero" required>
+          </div>
+          <div class="form-group">
+            <label>Indirizzo di ritiro</label>
+            <input type="text" name="indirizzoRitiro" placeholder="Via, numero civico, città" required>
+          </div>
+          <div class="form-group">
+            <label>Indirizzo di consegna</label>
+            <input type="text" name="indirizzoConsegna" placeholder="Via, numero civico, città" required>
+          </div>
+          <div class="form-group">
+            <label>Data del trasloco</label>
+            <input type="date" name="dataTrasloco" required>
+          </div>
+          <div class="form-group">
+            <label>Orario preferito</label>
+            <select name="orario" required>
+              <option value="morning">Mattina (8:00 - 12:00)</option>
+              <option value="afternoon">Pomeriggio (13:00 - 17:00)</option>
+              <option value="evening">Sera (18:00 - 21:00)</option>
+            </select>
+          </div>
+          <div class="form-group extra-checkbox">
+            <label>
+              <input type="checkbox" id="extra-fuoriMilano" name="extraFuoriMilano"> Trasloco fuori Milano e Provincia (+€100)
+            </label>
+          </div>
+        </div>
+        <input type="hidden" name="bookingCart" id="bookingCartInput">
+        <input type="hidden" name="totale" id="totaleInput">
+        <div class="booking-summary" style="text-align:center; margin-bottom:20px;">
+          <h3>Totale Prenotazione: €<span id="total-price">0</span></h3>
+          <button type="button" class="btn-invio" onclick="submitBooking()">Invia richiesta</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  
+  <!-- Sezione Punti di Forza -->
+  <section id="punti-forza" class="punti-forza animate-on-scroll">
+    <div class="container">
+      <h2 style="color: var(--primary);">MoveMe: Azienda leader di traslochi</h2>
+      <p class="slogan">Affidabilità, Professionalità e Sostenibilità: il tuo partner ideale a Milano</p>
+      <div class="punti-grid">
+        <div class="punto">
+          <i class="fas fa-tools"></i>
+          <h4>Tecnici Addestrati</h4>
+          <p>Montaggio dei mobili a regola d'arte grazie a professionisti specializzati.</p>
+        </div>
+        <div class="punto">
+          <i class="fas fa-award"></i>
+          <h4>Massima Professionalità</h4>
+          <p>Esperienza pluriennale e servizio garantito per traslochi senza stress.</p>
+        </div>
+        <div class="punto">
+          <i class="fas fa-leaf"></i>
+          <h4>Sostenibilità</h4>
+          <p>Servizio eco sostenibile: utilizziamo solo materiali riciclabili al 100%.</p>
+        </div>
+        <div class="punto">
+          <i class="fas fa-certificate"></i>
+          <h4>Certificati ISO</h4>
+          <p>Garanzia di qualità e sicurezza nei nostri servizi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sezione Recensioni -->
+  <section id="recensioni" class="recensioni animate-on-scroll">
+    <div class="container">
+      <h2>Progetti & Recensioni</h2>
+      <div class="review-grid">
+        <div class="review">
+          <p><strong>Piazza Italia</strong> – "Abbiamo affidato a MoveMe il trasloco, il montaggio e la sistemazione degli arredi per il nostro negozio di abbigliamento. Il servizio è stato preciso, puntuale e di altissimo livello."</p>
+          <p class="author">– Piazza Italia</p>
+        </div>
+        <div class="review">
+          <p><strong>XFactor</strong> – "Per il nostro evento musicale, MoveMe ha gestito il trasloco e il facchinaggio degli allestimenti con grande professionalità. Un coordinamento impeccabile ha fatto la differenza."</p>
+          <p class="author">– XFactor</p>
+        </div>
+        <div class="review">
+          <p><strong>Nameless Festival</strong> – "MoveMe ha eseguito il trasloco e il montaggio per il nostro festival con estrema precisione, garantendo efficienza e cura dei dettagli."</p>
+          <p class="author">– Nameless Festival</p>
+        </div>
+        <div class="review">
+          <p><strong>Cliente Privato</strong> – "Il mio trasloco è stato organizzato alla perfezione. Hanno imballato, trasportato e montato tutto con grande cura, rendendo l'intero processo semplice e senza stress."</p>
+          <p class="author">– Cliente Privato</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sezione Partners -->
+  <section id="partners" class="partners animate-on-scroll">
+    <div class="container">
+      <h2>Partners</h2>
+      <div class="partner-grid">
+        <div class="partner">
+          <img src="piazza-italia.png" alt="Logo Piazza Italia">
+          <h4>Piazza Italia</h4>
+        </div>
+        <div class="partner">
+          <img src="xfactor.png" alt="Logo XFactor">
+          <h4>XFactor</h4>
+        </div>
+        <div class="partner">
+          <img src="nameless.png" alt="Logo Nameless Festival">
+          <h4>Nameless Festival</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sezione Contattaci con Mappa Dinamica -->
+  <section id="contattaci" class="contattaci-section animate-on-scroll">
+    <div class="container">
+      <h2>Contattaci</h2>
+      <div class="contatti-box">
+        <div class="contatti-info">
+          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:mangooasi@gmail.com">mangooasi@gmail.com</a></p>
+          <p><i class="fas fa-phone-alt"></i> Telefono: <a href="tel:+393668770059">+39 3668770059</a></p>
+          <p>Operiamo a Milano e Provincia con servizi rapidi e professionali.</p>
+        </div>
+        <div class="contatti-map">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44779.85563133365!2d9.139336911671807!3d45.461143815058004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c6a3ba3c3823%3A0x21d5a3c3698b3927!2sMilano%20MI!5e0!3m2!1sit!2sit!4v1689999999999!5m2!1sit!2sit" 
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="animate-on-scroll">
+    <div class="container">
+      <a href="#hero" class="logo" onclick="scrollToSection(event, 'hero')">Move<span>Me</span></a>
+      <p>&copy; 2025 MoveMe - Tutti i diritti riservati</p>
+    </div>
+  </footer>
+  
+  <!-- Modal di conferma -->
+  <div id="confirmationModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:2000; justify-content:center; align-items:center;">
+    <div class="modal-content">
+      <a href="#" class="close-btn" onclick="closeModal()">&times;</a>
+      <i class="fas fa-check-circle" style="font-size:3rem; color: var(--secondary); margin-bottom:20px;"></i>
+      <h2 id="modalTitle" style="margin-bottom:10px; color: var(--primary);"></h2>
+      <p id="modalMessage" style="font-size:1.1rem; color: var(--dark);"></p>
+      <button onclick="closeModal()" class="btn" style="margin-top:20px;">Chiudi</button>
+    </div>
+  </div>
+  
+  <script>
+    // Funzione per lo scroll smooth che previene il comportamento predefinito
+    function scrollToSection(event, sectionId) {
+      event.preventDefault();
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Animazione in scroll: Intersection Observer
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Funzioni per i controlli plus/minus dei traslochi interi (max 1 per box)
+    function increaseTrasloco(btn, type) {
+      const span = document.getElementById("trasloco-" + type);
+      let val = parseInt(span.textContent);
+      if (val < 1) {
+        val++;
+        span.textContent = val;
+        btn.parentElement.parentElement.classList.add("selected");
+        updateCartUI();
+      }
+    }
+    function decreaseTrasloco(btn, type) {
+      const span = document.getElementById("trasloco-" + type);
+      let val = parseInt(span.textContent);
+      if (val > 0) {
+        val--;
+        span.textContent = val;
+        btn.parentElement.parentElement.classList.remove("selected");
+        updateCartUI();
+      }
+    }
+    
+    // Gestione degli articoli della cart
+    let bookingCart = {
+      divano: 0,
+      tavolo: 0,
+      sedie: 0,
+      letto: 0,
+      armadio: 0,
+      sofa: 0,
+      frigo: 0,
+      bici: 0,
+      scrivania: 0,
+      libreria: 0,
+      lavatrice: 0,
+      forno: 0,
+      lavastoviglie: 0,
+      stufa: 0,
+      tv: 0,
+      computer: 0,
+      stereo: 0,
+      vetrine: 0,
+      specchi: 0,
+      scatolaPiatti: 0,
+      pianoforte: 0,
+      tapisRoulant: 0,
+      sgabelli: 0,
+      scatoloni: 0,
+      piante: 0,
+      barbecue: 0,
+      mobiliGiardino: 0,
+      scatolone30kg: 0,
+      appartamento: 0
+    };
+    
+    function getPrice(item) {
+      const prices = {
+        divano: 150,
+        tavolo: 100,
+        sedie: 50,
+        letto: 150,
+        armadio: 150,
+        sofa: 150,
+        frigo: 150,
+        bici: 30,
+        scrivania: 80,
+        libreria: 100,
+        lavatrice: 150,
+        forno: 60,
+        lavastoviglie: 100,
+        stufa: 100,
+        tv: 100,
+        computer: 30,
+        stereo: 50,
+        vetrine: 150,
+        specchi: 60,
+        scatolaPiatti: 40,
+        pianoforte: 200,
+        tapisRoulant: 150,
+        sgabelli: 30,
+        scatoloni: 30,
+        piante: 30,
+        barbecue: 80,
+        mobiliGiardino: 40,
+        scatolone30kg: 40,
+        appartamento: 1000,
+        monolocale: 500,
+        bilocale: 800,
+        casaIndipendente: 2500
+      };
+      return prices[item] || 0;
+    }
+    
+    function updateCartUI() {
+      let total = 0;
+      // Somma degli oggetti della cart
+      for (let item in bookingCart) {
+        total += bookingCart[item] * getPrice(item);
+        let display = document.getElementById(item + '-qty');
+        if (display) display.textContent = bookingCart[item];
+      }
+      // Somma dei box traslochi interi
+      const traslochiItems = document.querySelectorAll('.traslochi-item');
+      traslochiItems.forEach(item => {
+        if (item.querySelector('.traslochi-controls span').textContent === "1") {
+          total += Number(item.getAttribute("data-price"));
+        }
+      });
+      // Extra trasloco fuori Milano
+      if (document.getElementById('extra-fuoriMilano') && document.getElementById('extra-fuoriMilano').checked) {
+        total += 100;
+      }
+      document.getElementById('total-price').textContent = total;
+      let totalHeader = document.querySelector('.total-header span');
+      if (totalHeader) totalHeader.textContent = total;
+    }
+    
+    function increaseQuantity(item) {
+      bookingCart[item]++;
+      updateCartUI();
+    }
+    
+    function decreaseQuantity(item) {
+      if (bookingCart[item] > 0) {
+        bookingCart[item]--;
+        updateCartUI();
+      }
+    }
+    
+    function showModal(title, message) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalMessage').textContent = message;
+      document.getElementById('confirmationModal').style.display = 'flex';
+    }
+    
+    function closeModal() {
+      document.getElementById('confirmationModal').style.display = 'none';
+    }
+    
+    function validateBookingForm() {
+      const form = document.getElementById('bookingForm');
+      const requiredFields = form.querySelectorAll('input[required], select[required]');
+      let allValid = true;
+      let errorMessages = [];
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          allValid = false;
+          let fieldName = field.previousElementSibling ? field.previousElementSibling.innerText : "Campo obbligatorio";
+          errorMessages.push(fieldName);
+        }
+      });
+      return { valid: allValid, messages: errorMessages };
+    }
+    
+    function submitBooking() {
+      const validation = validateBookingForm();
+      const errorDiv = document.getElementById('bookingFormErrors');
+      if (!validation.valid) {
+        errorDiv.textContent = "Compilare questi campi: " + validation.messages.join(", ");
+        return;
+      } else {
+        errorDiv.textContent = "";
+      }
+      document.getElementById('bookingCartInput').value = JSON.stringify(bookingCart);
+      document.getElementById('totaleInput').value = document.getElementById('total-price').textContent;
+      const form = document.getElementById('bookingForm');
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          showModal("Richiesta Inviata", "La tua richiesta di trasloco è stata inviata correttamente. Controlla la tua mail per la conferma. Grazie da MoveMe!");
+          form.reset();
+          for (let item in bookingCart) { bookingCart[item] = 0; }
+          updateCartUI();
+        } else {
+          response.json().then(data => {
+            if (data.errors) {
+              alert("Errore: " + data.errors.map(error => error.message).join(", "));
+            } else {
+              alert("Errore nell'invio della richiesta.");
+            }
+          });
+        }
+      }).catch(error => {
+        alert("Errore di rete: " + error.message);
+      });
+    }
+    
+    function scrollToSection(event, sectionId) {
+      event.preventDefault();
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    if (document.getElementById('extra-fuoriMilano')) {
+      document.getElementById('extra-fuoriMilano').addEventListener('change', updateCartUI);
+    }
+  </script>
+</body>
+</html>
