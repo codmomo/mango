@@ -1,0 +1,142 @@
+:root {
+  --primary: #1a73e8;
+  --secondary: #34a853;
+  --accent: #fbbc05;
+  --light: #f8f9fa;
+  --dark: #202124;
+  --gray: #5f6368;
+  --light-gray: #dadce0;
+}
+
+body {
+  background-color: var(--light);
+  color: var(--dark);
+  margin: 0;
+  padding-top: 80px;
+  user-select: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar */
+header {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary);
+  text-decoration: none;
+}
+.logo span { color: var(--secondary); }
+.nav-links {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+.nav-links li { margin-left: 30px; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--primary); }
+.contatti-link { font-weight: 600; color: var(--primary); }
+.total-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+  background-color: #eef6ff;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+/* Hamburger menu (per mobile) */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+/* Hero Section */
+.hero {
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("moveme.png");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 150px 20px 100px;
+}
+.hero h1 { font-size: 48px; margin-bottom: 20px; }
+.hero p { font-size: 20px; max-width: 700px; margin: 0 auto 30px; }
+.hero .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+.hero .btn:hover { background-color: #0d5bcd; }
+
+/* (Inserisci qui ulteriori stili per Booking, Items, Punti di Forza, Recensioni, Partners, Contattaci, Footer, ecc.) */
+
+/* Protezione delle immagini */
+img {
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+
+/* Animazioni in scroll (usando Animate.css per esempio) */
+/* Aggiungi classi animate__animated, animate__fadeIn, ecc. direttamente nei tag se necessario */
+
+/* Footer */
+footer {
+  background-color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+footer p { font-size: 14px; color: var(--gray); }
+
+/* Banner Copyright */
+copyright, .copyright {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--gray);
+}

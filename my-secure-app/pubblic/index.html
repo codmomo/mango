@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="MoveMe - Servizio traslochi a Milano: traslochi, montaggio mobili, facchinaggio e stoccaggio per privati, aziende e partner.">
+  <meta name="keywords" content="traslochi, montaggio mobili, Milano, MoveMe, trasloco intero">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoveMe - Traslochi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body oncontextmenu="return false;">
+  <!-- Navbar con menu hamburger (responsive) -->
+  <header class="animate__animated">
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo" onclick="navigate(event, 'home')">Move<span>Me</span></a>
+        <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home" onclick="navigate(event, 'home')">Home</a></li>
+          <li><a href="#booking" onclick="navigate(event, 'booking')">Prenota trasloco</a></li>
+          <li><a href="#punti-forza" onclick="navigate(event, 'punti-forza')">I nostri Vantaggi</a></li>
+          <li><a href="#contattaci" class="contatti-link" onclick="navigate(event, 'contattaci')">Contattaci</a></li>
+          <li class="total-header">Totale Trasloco: €<span id="total-top">0</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Container per il contenuto dinamico -->
+  <main id="content" class="container">
+    <!-- Il contenuto verrà caricato dinamicamente -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="animate__animated">
+    <div class="container">
+      <a href="#home" class="logo" onclick="navigate(event, 'home')">Move<span>Me</span></a>
+      <p>&copy; 2025 MoveMe - Tutti i diritti riservati</p>
+    </div>
+  </footer>
+  <!-- Banner Copyright -->
+  <div class="copyright">
+    <p>© 2025 MoveMe. Tutti i diritti sono riservati. Utilizzando questo sito accetti la nostra <a href="#">Politica sulla Privacy</a> e l'uso dei cookie.</p>
+  </div>
+</body>
+</html>
