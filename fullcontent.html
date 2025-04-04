@@ -1,0 +1,261 @@
+<!-- Sezione Hero -->
+<section id="hero" class="hero animate-on-scroll">
+  <div class="container">
+    <h1>Traslochi semplici e veloci a Milano</h1>
+    <p>MoveMe offre un servizio professionale per muovere i tuoi oggetti in tutta Milano e provincia.</p>
+    <a href="#" class="btn" onclick="loadContent('booking')">Programma il tuo trasloco</a>
+  </div>
+</section>
+
+<!-- Sezione Booking -->
+<section id="booking" class="booking-section animate-on-scroll">
+  <div class="container">
+    <h2>Prenota il tuo Trasloco</h2>
+    <div class="booking-description">
+      <p><strong>First step:</strong> Seleziona il tuo tipo di trasloco: scegli se effettuare un trasloco intero oppure trasportare singoli oggetti.</p>
+      <p><strong>Second step:</strong> Compila i dati sottostanti per richiedere il servizio.</p>
+    </div>
+    
+    <!-- Sezione Traslochi case intere (Promozione) -->
+    <div class="promozione">Promozione</div>
+    <div class="traslochi-case animate-on-scroll">
+      <!-- Monolocale -->
+      <div class="traslochi-item" data-case="monolocale" data-price="500">
+        <div class="traslochi-controls">
+          <button onclick="decreaseTrasloco(this, 'monolocale')" type="button">–</button>
+          <span id="trasloco-monolocale">0</span>
+          <button onclick="increaseTrasloco(this, 'monolocale')" type="button">+</button>
+        </div>
+        <i class="fas fa-home"></i>
+        <h4>Monolocale</h4>
+        <p>€500</p>
+        <small>trasloco intero con montaggio</small>
+      </div>
+      <!-- Bilocale -->
+      <div class="traslochi-item" data-case="bilocale" data-price="800">
+        <div class="traslochi-controls">
+          <button onclick="decreaseTrasloco(this, 'bilocale')" type="button">–</button>
+          <span id="trasloco-bilocale">0</span>
+          <button onclick="increaseTrasloco(this, 'bilocale')" type="button">+</button>
+        </div>
+        <i class="fas fa-building"></i>
+        <h4>Bilocale</h4>
+        <p>€800</p>
+        <small>trasloco intero con montaggio</small>
+      </div>
+      <!-- Casa indipendente -->
+      <div class="traslochi-item" data-case="casaIndipendente" data-price="2500">
+        <div class="traslochi-controls">
+          <button onclick="decreaseTrasloco(this, 'casaIndipendente')" type="button">–</button>
+          <span id="trasloco-casaIndipendente">0</span>
+          <button onclick="increaseTrasloco(this, 'casaIndipendente')" type="button">+</button>
+        </div>
+        <i class="fas fa-house-user"></i>
+        <h4>Casa indipendente</h4>
+        <p>€2500</p>
+        <small>trasloco intero con montaggio</small>
+      </div>
+      <!-- Appartamento 3 camere -->
+      <div class="traslochi-item" data-case="appartamento" data-price="1000">
+        <div class="traslochi-controls">
+          <button onclick="decreaseTrasloco(this, 'appartamento')" type="button">–</button>
+          <span id="trasloco-appartamento">0</span>
+          <button onclick="increaseTrasloco(this, 'appartamento')" type="button">+</button>
+        </div>
+        <i class="fas fa-city"></i>
+        <h4>Appartamento 3 camere</h4>
+        <p>€1000</p>
+        <small>trasloco intero con montaggio</small>
+      </div>
+    </div>
+    
+    <!-- Griglia degli articoli da traslocare -->
+    <div class="items-grid">
+      <!-- Esempio: Divano -->
+      <div class="item-card animate-on-scroll">
+        <i class="fas fa-couch"></i>
+        <h4>Divano</h4>
+        <p>€150</p>
+        <div>
+          <button class="quantity-btn" onclick="decreaseQuantity('divano')">–</button>
+          <span class="quantity-display" id="divano-qty">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('divano')">+</button>
+        </div>
+      </div>
+      <!-- Esempio: Letto -->
+      <div class="item-card animate-on-scroll">
+        <i class="fas fa-bed"></i>
+        <h4>Letto</h4>
+        <p>€150</p>
+        <div>
+          <button class="quantity-btn" onclick="decreaseQuantity('letto')">–</button>
+          <span class="quantity-display" id="letto-qty">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('letto')">+</button>
+        </div>
+      </div>
+      <!-- Esempio: Armadio -->
+      <div class="item-card animate-on-scroll">
+        <i class="fas fa-warehouse"></i>
+        <h4>Armadio</h4>
+        <p>€150</p>
+        <div>
+          <button class="quantity-btn" onclick="decreaseQuantity('armadio')">–</button>
+          <span class="quantity-display" id="armadio-qty">0</span>
+          <button class="quantity-btn" onclick="increaseQuantity('armadio')">+</button>
+        </div>
+      </div>
+      <!-- Altri oggetti (Tavolo, Sedia, Scrivania, Libreria, ecc.) vanno aggiunti qui seguendo lo stesso schema -->
+    </div>
+    
+    <!-- Form Prenotazione -->
+    <form id="bookingForm" action="https://formspree.io/f/xvgzdvra" method="POST" class="animate-on-scroll">
+      <div id="bookingFormErrors" class="error-message"></div>
+      <div class="booking-form">
+        <h3>Inserisci i tuoi dati</h3>
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" name="nome" placeholder="Inserisci il tuo nome" required>
+        </div>
+        <div class="form-group">
+          <label>Cognome</label>
+          <input type="text" name="cognome" placeholder="Inserisci il tuo cognome" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="Inserisci la tua email" required>
+        </div>
+        <div class="form-group">
+          <label>Numero di Telefono</label>
+          <input type="tel" name="telefono" placeholder="Inserisci il tuo numero" required>
+        </div>
+        <div class="form-group">
+          <label>Indirizzo di ritiro</label>
+          <input type="text" name="indirizzoRitiro" placeholder="Via, numero civico, città" required>
+        </div>
+        <div class="form-group">
+          <label>Indirizzo di consegna</label>
+          <input type="text" name="indirizzoConsegna" placeholder="Via, numero civico, città" required>
+        </div>
+        <div class="form-group">
+          <label>Data del trasloco</label>
+          <input type="date" name="dataTrasloco" required>
+        </div>
+        <div class="form-group">
+          <label>Orario preferito</label>
+          <select name="orario" required>
+            <option value="morning">Mattina (8:00 - 12:00)</option>
+            <option value="afternoon">Pomeriggio (13:00 - 17:00)</option>
+            <option value="evening">Sera (18:00 - 21:00)</option>
+          </select>
+        </div>
+        <div class="form-group extra-checkbox">
+          <label>
+            <input type="checkbox" id="extra-fuoriMilano" name="extraFuoriMilano"> Trasloco fuori Milano e Provincia (+€100)
+          </label>
+        </div>
+      </div>
+      <input type="hidden" name="bookingCart" id="bookingCartInput">
+      <input type="hidden" name="totale" id="totaleInput">
+      <div class="booking-summary" style="text-align:center; margin-bottom:20px;">
+        <h3>Totale Prenotazione: €<span id="total-price">0</span></h3>
+        <button type="button" class="btn-invio" onclick="submitBooking()">Invia richiesta</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Sezione Punti di Forza -->
+<section id="vantaggi" class="punti-forza animate-on-scroll">
+  <div class="container">
+    <h2 style="color: var(--primary);">MoveMe: Azienda leader di traslochi</h2>
+    <p class="slogan">Affidabilità, Professionalità e Sostenibilità: il tuo partner ideale a Milano</p>
+    <div class="punti-grid">
+      <div class="punto">
+        <i class="fas fa-tools"></i>
+        <h4>Tecnici Addestrati</h4>
+        <p>Montaggio dei mobili a regola d'arte grazie a professionisti specializzati.</p>
+      </div>
+      <div class="punto">
+        <i class="fas fa-award"></i>
+        <h4>Massima Professionalità</h4>
+        <p>Esperienza pluriennale e servizio garantito per traslochi senza stress.</p>
+      </div>
+      <div class="punto">
+        <i class="fas fa-leaf"></i>
+        <h4>Sostenibilità</h4>
+        <p>Servizio eco sostenibile: utilizziamo solo materiali riciclabili al 100%.</p>
+      </div>
+      <div class="punto">
+        <i class="fas fa-certificate"></i>
+        <h4>Certificati ISO</h4>
+        <p>Garanzia di qualità e sicurezza nei nostri servizi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sezione Recensioni -->
+<section id="recensioni" class="recensioni animate-on-scroll">
+  <div class="container">
+    <h2>Progetti & Recensioni</h2>
+    <div class="review-grid">
+      <div class="review">
+        <p><strong>Piazza Italia</strong> – "Abbiamo affidato a MoveMe il trasloco, il montaggio e la sistemazione degli arredi per il nostro negozio di abbigliamento. Il servizio è stato preciso, puntuale e di altissimo livello."</p>
+        <p class="author">– Piazza Italia</p>
+      </div>
+      <div class="review">
+        <p><strong>XFactor</strong> – "Per il nostro evento musicale, MoveMe ha gestito il trasloco e il facchinaggio degli allestimenti con grande professionalità. Un coordinamento impeccabile ha fatto la differenza."</p>
+        <p class="author">– XFactor</p>
+      </div>
+      <div class="review">
+        <p><strong>Nameless Festival</strong> – "MoveMe ha eseguito il trasloco e il montaggio per il nostro festival con estrema precisione, garantendo efficienza e cura dei dettagli."</p>
+        <p class="author">– Nameless Festival</p>
+      </div>
+      <div class="review">
+        <p><strong>Cliente Privato</strong> – "Il mio trasloco è stato organizzato alla perfezione. Hanno imballato, trasportato e montato tutto con grande cura, rendendo l'intero processo semplice e senza stress."</p>
+        <p class="author">– Cliente Privato</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sezione Partners -->
+<section id="partners" class="partners animate-on-scroll">
+  <div class="container">
+    <h2>Partners</h2>
+    <div class="partner-grid">
+      <div class="partner">
+        <img src="piazza-italia.png" alt="Logo Piazza Italia">
+        <h4>Piazza Italia</h4>
+      </div>
+      <div class="partner">
+        <img src="xfactor.png" alt="Logo XFactor">
+        <h4>XFactor</h4>
+      </div>
+      <div class="partner">
+        <img src="nameless.png" alt="Logo Nameless Festival">
+        <h4>Nameless Festival</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sezione Contattaci -->
+<section id="contatti" class="contattaci-section animate-on-scroll">
+  <div class="container">
+    <h2>Contattaci</h2>
+    <div class="contatti-box">
+      <div class="contatti-info">
+        <p><i class="fas fa-envelope"></i> Email: <a href="mailto:mangooasi@gmail.com">mangooasi@gmail.com</a></p>
+        <p><i class="fas fa-phone-alt"></i> Telefono: <a href="tel:+393668770059">+39 3668770059</a></p>
+        <p>Operiamo a Milano e Provincia con servizi rapidi e professionali.</p>
+      </div>
+      <div class="contatti-map">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44779.85563133365!2d9.139336911671807!3d45.461143815058004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c6a3ba3c3823%3A0x21d5a3c3698b3927!2sMilano%20MI!5e0!3m2!1sit!2sit!4v1689999999999!5m2!1sit!2sit" 
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
